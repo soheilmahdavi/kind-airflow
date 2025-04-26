@@ -1,33 +1,43 @@
 ### Create a kubernetes cluster of 1 control plane and 3 worker nodes
-  kind create cluster --name airflow-cluster --config kind-cluster.yaml
-
+``` bash
+kind create cluster --name airflow-cluster --config kind-cluster.yaml
+```
 ### Check the cluster info
-  kubectl cluster-info
-
+``` bash
+kubectl cluster-info
+```
 ### Check the nodes with kubectl
-  kubectl get nodes -o wide
-
+``` bash
+kubectl get nodes -o wide
+```
 ### Add the official repository of the Airflow Helm Chart
-  helm repo add apache-airflow https://airflow.apache.org
-
+``` bash
+helm repo add apache-airflow https://airflow.apache.org
+```
 ### Update the repo
-  helm repo update
-
+``` bash
+helm repo update
+```
 ### Create namespace airflow
-  kubectl create namespace airflow
-
+``` bash
+kubectl create namespace airflow
+```
 ### Check the namespace 
-  kubectl get namespaces
-
+``` bash
+kubectl get namespaces
+```
 ### Install the Airflow Helm Chart
-  helm install airflow apache-airflow/airflow --namespace airflow --debug
-
+``` bash
+helm install airflow apache-airflow/airflow --namespace airflow --debug
+```
 ### Get pods
-  kubectl get pods -n airflow
-
+``` bash
+kubectl get pods -n airflow
+```
 ### Check release
-  helm ls -n airflow
-
+``` bash
+helm ls -n airflow
+```
 ### If for some reasons the release is stuck in pending-install or timed out
 ### Resinstall the chart
 ``` bash 
@@ -36,22 +46,39 @@ helm install airflow apache-airflow/airflow --namespace airflow --debug —timeo
 ```
 
 ### Port forward 8080:8080
+``` bash
 kubectl port-forward svc/airflow-webserver 8080:8080 -n airflow --context kind-airflow-cluster
+
+```
 -------------------------------------------------------------------------------------------------------
 
-
+``` bash
 kind create cluster --name airflow-cluster --config kind-cluster.yaml
+```
 
+``` bash
 kind delete cluster --name=kind
+```
 
-
+``` bash
 IMAGE_TAG=1.0.3
 docker build -t airflow-image:${IMAGE_TAG} .
 docker tag airflow-image:${IMAGE_TAG} localhost:5000/airflow-image:${IMAGE_TAG}
 docker push localhost:5000/airflow-image:${IMAGE_TAG}
+```
 
+``` bash
 helm install airflow airflow/airflow --kube-context kind-kind   -f values.yaml
-helm upgrade airflow airflow/airflow   --kube-context kind-kind   -f values.yaml
-helm upgrade --install airflow airflow/airflow  --kube-context kind-kind -f values.yaml
+```
 
+``` bash
+helm upgrade airflow airflow/airflow   --kube-context kind-kind   -f values.yaml
+```
+
+``` bash
+helm upgrade --install airflow airflow/airflow  --kube-context kind-kind -f values.yaml
+```
+
+``` bash
 helm uninstall airflow --kube-context kind-kind
+```
