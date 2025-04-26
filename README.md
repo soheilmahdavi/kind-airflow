@@ -18,6 +18,11 @@ helm repo add apache-airflow https://airflow.apache.org
 ``` bash
 helm repo update
 ```
+### Get values
+``` bash
+helm show values apache-airflow/airflow > values.yaml
+```
+
 ### Create namespace airflow
 ``` bash
 kubectl create namespace airflow
