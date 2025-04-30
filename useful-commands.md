@@ -1,3 +1,10 @@
+#### Run Local Docker registry
+docker build -t my-airflow:v1 .
+docker run -d --restart=always -p "127.0.0.1:5000:5000" --name registry registry:2
+docker tag my-airflow:v1 localhost:5000/my-airflow:v1
+curl -s http://localhost:5000/v2/_catalog
+
+
 ##### Install minikube
 
 ```
